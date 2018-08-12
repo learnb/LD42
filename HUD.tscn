@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 
-resource_name = "space_animate"
-length = 1.0
+resource_name = "space_animate_end"
+length = 4.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -16,10 +16,67 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 60.0 ]
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 704.0, 64.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+
+resource_name = "space_animate_zone_1"
+length = 4.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Space:margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 60.0, 192.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+
+resource_name = "space_animate_zone_2"
+length = 4.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Space:margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 192.0, 448.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+
+resource_name = "space_animate_zone_3"
+length = 4.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Space:margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 448.0, 704.0 ]
 }
 
 [sub_resource type="DynamicFont" id=1]
@@ -65,7 +122,10 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/space_animate = SubResource( 5 )
+anims/space_animate_end = SubResource( 6 )
+anims/space_animate_zone_1 = SubResource( 5 )
+anims/space_animate_zone_2 = SubResource( 7 )
+anims/space_animate_zone_3 = SubResource( 8 )
 blend_times = [  ]
 
 [node name="Space" type="ColorRect" parent="AnimationPlayer" index="0"]
@@ -76,7 +136,7 @@ anchor_right = 0.5
 anchor_bottom = 0.0
 margin_left = -300.0
 margin_right = 300.0
-margin_bottom = 60.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -147,7 +207,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 3 )
-text = "1000000"
+text = "0"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0

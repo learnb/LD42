@@ -1,6 +1,7 @@
 extends Area2D
 
 signal hit
+signal point
 
 export (int) var speed
 var jumping = false
@@ -31,11 +32,20 @@ func _process(delta):
 			# Now jump animation begins with I-frames.
 			jumping = true
 			$AnimatedSprite.animation = "jump"
+			change_alpha(0)
 			yield($AnimatedSprite, "animation_finished")
+			change_alpha(1)
 			jumping = false
 			$AnimatedSprite.animation = "run"
 
+func change_alpha(value):
+	if value == 0:
+		self.modulate = Color(1, 1, 1, .6)
+	elif value == 1:
+		self.modulate = Color(1, 1, 1, 1)
 
 func _on_Player_body_entered(body):
 	if not jumping:
 		emit_signal("hit")
+	else:
+		emit_signal("point")
