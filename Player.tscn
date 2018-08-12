@@ -1,0 +1,158 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://art/player_jump1.png" type="Texture" id=2]
+[ext_resource path="res://art/player_jump2.png" type="Texture" id=3]
+[ext_resource path="res://art/player_jump3.png" type="Texture" id=4]
+[ext_resource path="res://art/player_jump4.png" type="Texture" id=5]
+[ext_resource path="res://art/player_jump5.png" type="Texture" id=6]
+[ext_resource path="res://art/player_idle.png" type="Texture" id=7]
+[ext_resource path="res://art/player_run1.png" type="Texture" id=8]
+[ext_resource path="res://art/player_run2.png" type="Texture" id=9]
+
+[sub_resource type="CapsuleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 14.3618
+height = 6.61559
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "duck",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "jump",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="ParticlesMaterial" id=3]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 180.0
+flatness = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 6.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 1.0
+linear_accel_random = 0.0
+radial_accel = 1.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 5.0
+scale_random = 1.0
+color = Color( 0.8125, 0.552296, 0.184082, 1 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Gravity", "Hue Variation", "Linear Accel", "Radial Accel", "Spread" ]
+
+[node name="Player" type="Area2D"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( -0.263519, 29.2507 )
+rotation = 1.5708
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+
+frames = SubResource( 2 )
+animation = "duck"
+frame = 1
+playing = true
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="TrailLeft" type="Particles2D" parent="." index="2"]
+
+show_behind_parent = true
+position = Vector2( -10.8043, 33.2035 )
+emitting = true
+amount = 4
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.2
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 3 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Pause", "Process Material", "Time" ]
+
+[node name="TrailRight" type="Particles2D" parent="." index="3"]
+
+show_behind_parent = true
+position = Vector2( 11.3313, 32.413 )
+emitting = true
+amount = 4
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.2
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 3 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Pause", "Process Material", "Time" ]
+
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+
+

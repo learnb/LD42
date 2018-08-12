@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Road.gd" type="Script" id=1]
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "road_color_animate"
+length = 3.5
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.921875, 0.0396118, 0.0396118, 1 ), Color( 0.921875, 0.414968, 0.0792236, 1 ), Color( 0.774724, 0.816406, 0.0542145, 1 ), Color( 0.185216, 0.816406, 0.0542145, 1 ), Color( 0.0542145, 0.780679, 0.816406, 1 ), Color( 0.109375, 0.165039, 1, 1 ), Color( 0.792588, 0.0542145, 0.816406, 1 ), Color( 0.921875, 0.0396118, 0.0396118, 1 ) ]
+}
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0.0887574, 0.278107, 0.390533, 0.556213, 0.698225, 0.846154, 0.934911 )
+colors = PoolColorArray( 0.800781, 0.193939, 0.193939, 1, 0.800781, 0.592179, 0.193939, 1, 0.79604, 0.800781, 0.193939, 1, 0.326686, 0.800781, 0.193939, 1, 0.193939, 0.786558, 0.800781, 1, 0.193939, 0.24609, 0.800781, 1, 0.710703, 0.193939, 0.800781, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+
+flags = 4
+gradient = SubResource( 1 )
+width = 960
+
+[node name="Road" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/road_color_animate = SubResource( 3 )
+blend_times = [  ]
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer" index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -480.0
+margin_right = 160.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.686505, 0.816406, 0.0542145, 1 )
+_sections_unfolded = [ "Margin" ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+visible = false
+position = Vector2( 300, 480 )
+rotation = -1.5708
+texture = SubResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 320 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+
