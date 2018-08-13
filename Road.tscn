@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Road.gd" type="Script" id=1]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 
 resource_name = "road_clear"
 length = 8.0
@@ -45,9 +45,8 @@ tracks/2/keys = {
 "values": [ 160.0, 300.0 ]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=2]
 
-resource_name = "road_color_animate"
 length = 3.5
 loop = true
 step = 0.1
@@ -64,7 +63,7 @@ tracks/0/keys = {
 "values": [ Color( 0.921875, 0.0396118, 0.0396118, 1 ), Color( 0.921875, 0.414968, 0.0792236, 1 ), Color( 0.774724, 0.816406, 0.0542145, 1 ), Color( 0.185216, 0.816406, 0.0542145, 1 ), Color( 0.0542145, 0.780679, 0.816406, 1 ), Color( 0.109375, 0.165039, 1, 1 ), Color( 0.792588, 0.0542145, 0.816406, 1 ), Color( 0.921875, 0.0396118, 0.0396118, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 
 resource_name = "road_earth_color"
 length = 3.0
@@ -83,7 +82,7 @@ tracks/0/keys = {
 "values": [ Color( 0.0810623, 0.664063, 0.0622559, 1 ), Color( 0.226244, 0.445313, 0.219177, 1 ), Color( 0.0738487, 0.421875, 0.0626221, 1 ), Color( 0.0587897, 0.667969, 0.0391388, 1 ), Color( 0.211105, 0.625, 0.197754, 1 ), Color( 0.164921, 0.332031, 0.159531, 1 ), Color( 0.0276794, 0.25, 0.0205078, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 
 resource_name = "road_earth_create"
 length = 4.0
@@ -114,15 +113,15 @@ tracks/1/keys = {
 "values": [ 120.0, 960.0 ]
 }
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=5]
 
 offsets = PoolRealArray( 0.0887574, 0.278107, 0.390533, 0.556213, 0.698225, 0.846154, 0.934911 )
 colors = PoolColorArray( 0.800781, 0.193939, 0.193939, 1, 0.800781, 0.592179, 0.193939, 1, 0.79604, 0.800781, 0.193939, 1, 0.326686, 0.800781, 0.193939, 1, 0.193939, 0.786558, 0.800781, 1, 0.193939, 0.24609, 0.800781, 1, 0.710703, 0.193939, 0.800781, 1 )
 
-[sub_resource type="GradientTexture" id=3]
+[sub_resource type="GradientTexture" id=6]
 
 flags = 4
-gradient = SubResource( 2 )
+gradient = SubResource( 5 )
 width = 960
 
 [node name="Road" type="Node"]
@@ -136,10 +135,10 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/road_clear = SubResource( 4 )
-anims/road_color_animate = SubResource( 1 )
-anims/road_earth_color = SubResource( 5 )
-anims/road_earth_create = SubResource( 6 )
+anims/road_clear = SubResource( 1 )
+anims/road_color_animate = SubResource( 2 )
+anims/road_earth_color = SubResource( 3 )
+anims/road_earth_create = SubResource( 4 )
 blend_times = [  ]
 
 [node name="ColorRect" type="ColorRect" parent="AnimationPlayer" index="0"]
@@ -165,7 +164,7 @@ _sections_unfolded = [ "Margin" ]
 visible = false
 position = Vector2( 300, 480 )
 rotation = -1.5708
-texture = SubResource( 3 )
+texture = SubResource( 6 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 960, 320 )
 _sections_unfolded = [ "Region", "Transform" ]

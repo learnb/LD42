@@ -21,6 +21,8 @@ func _ready():
 	$HUD.resize_space(ZONE_HEIGHTS[5])
 	$SpawnTimer.wait_time = 0.5
 	show_start_menu()
+	$Road.reset()
+	$BGMusicPlayer.play()
 
 func _process(delta):
 	if is_start_menu and Input.is_action_just_pressed("ui_accept"):
@@ -103,8 +105,7 @@ func _on_Road_clear_finished(): # Post-win animation
 	$HUD.show_message(msg)
 	$TransitionTimer.start()
 	yield($TransitionTimer, "timeout")
-	new_game()
-	#show_start_menu()
+	_ready()
 
 func clear_obs():
 	var regex = RegEx.new()
@@ -171,7 +172,9 @@ func make_bonus(value):
 	b.play("+"+str(value))
 
 func _on_Player_hit():
-	game_over()
+	if alive:
+		$SFXDeathPlayer.play()
+		game_over()
 
 func _on_SpawnTimer_timeout():
 	# Choose a random location
@@ -211,6 +214,7 @@ func update_points(value):
 
 func _on_Player_point():
 	if alive:
+		$SFXPointPlayer.play()
 		if zone == 0:
 			make_bonus(10)
 		if zone == 1:
