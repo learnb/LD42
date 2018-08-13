@@ -9,7 +9,7 @@ var alive = true
 var is_start_menu = true
 var zone = 0
 const SCORE_START = 5000
-const ZONE_LINES = [SCORE_START/4*3, SCORE_START/4*2, SCORE_START/4*1, SCORE_START/4*0]
+const ZONE_LINES = [SCORE_START/4*3, SCORE_START/4*2, SCORE_START/4*1, SCORE_START/4*0, SCORE_START*0.1]
 const ZONE_HEIGHTS = [64*1, 64*3, 64*7, 64*11, 64*13, 64*15]
 
 func _ready():
@@ -48,6 +48,7 @@ func new_game(): # Start button event
 	hide_start_menu()
 	
 	# Start Game
+	win = false
 	alive = true
 	update_points(0)
 	$HUD.resize_space(ZONE_HEIGHTS[0])
@@ -92,10 +93,17 @@ func win():
 	$SpawnTimer.stop()
 	$ScoreTimer.stop()
 	$Road.clear_road()
-	
-	# Congrats
-	# Credits
-	
+
+func _on_Road_clear_finished():
+	var msg = "Thank you for playing!"
+	msg += "\nFinal Score: " + str(points)
+	$HUD.show_message(msg)
+	$TransitionTimer.start()
+	yield($TransitionTimer, "timeout")
+	$TransitionTimer.start()
+	yield($TransitionTimer, "timeout")
+	#new_game()
+	show_start_menu()
 
 func clear_obs():
 	var regex = RegEx.new()
@@ -124,7 +132,7 @@ func change_zone(zone_index):
 	if zone_index == 3:
 		$HUD.show_message("Entering Geospace Zone\nAlmost home!")
 		$HUD.update_zone("Geospace")
-		$HUD.resize_for_zone(3)
+		#$HUD.resize_for_zone(3)
 		$SpawnTimer.wait_time = 0.25
 		#$HUD.resize_space(ZONE_HEIGHTS[3])
 	if zone_index == 4: # WIN
@@ -189,6 +197,8 @@ func _on_ScoreTimer_timeout():
 		change_zone(2)
 	if score == ZONE_LINES[2]: # Enter Zone 3 / Geospace
 		change_zone(3)
+	if score == (ZONE_LINES[4]): # Last 10%
+		$HUD.resize_for_zone(3)
 	if score == ZONE_LINES[3]: # Win / Earth
 		clear_obs()
 		change_zone(4)
@@ -209,3 +219,6 @@ func _on_Player_point():
 		if zone == 3:
 			make_bonus(500)
 	
+
+
+

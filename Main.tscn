@@ -285,6 +285,8 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
+[connection signal="clear_finished" from="Road" to="." method="_on_Road_clear_finished"]
+
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 
 [connection signal="point" from="Player" to="." method="_on_Player_point"]
