@@ -94,16 +94,17 @@ func win():
 	$ScoreTimer.stop()
 	$Road.clear_road()
 
-func _on_Road_clear_finished():
+func _on_Road_clear_finished(): # Post-win animation
 	var msg = "Thank you for playing!"
 	msg += "\nFinal Score: " + str(points)
 	$HUD.show_message(msg)
 	$TransitionTimer.start()
 	yield($TransitionTimer, "timeout")
+	$HUD.show_message(msg)
 	$TransitionTimer.start()
 	yield($TransitionTimer, "timeout")
-	#new_game()
-	show_start_menu()
+	new_game()
+	#show_start_menu()
 
 func clear_obs():
 	var regex = RegEx.new()
